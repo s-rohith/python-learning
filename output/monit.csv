@@ -1,0 +1,4 @@
+process,status
+rabbitmq-server,running
+bpm,running
+test,failing

@@ -1,0 +1,10 @@
+Filesystem,Size,Used,Avail,Use%,Mounted_on
+rootfs,846G,88G,758G,11%,/
+none,846G,88G,758G,11%,/dev
+none,846G,88G,758G,11%,/run
+none,846G,88G,758G,11%,/run/lock
+none,846G,88G,758G,11%,/run/shm
+none,846G,88G,758G,11%,/run/user
+tmpfs,846G,88G,758G,11%,/sys/fs/cgroup
+C:\,846G,88G,758G,11%,/mnt/c
+D:\,1000G,337G,664G,34%,/mnt/d

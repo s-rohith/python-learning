@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf output.csv output.json > /dev/null
+rm -rf ./output/output.csv > /dev/null
 
 cert_path="/etc/ssl/certs/CA_Disig_Root_R2.pem"
 
@@ -8,7 +8,7 @@ n=$(openssl x509 -noout -dates -in "${cert_path}" | wc -l)
 
 for((i=1;i<=n;++i)); do
     m=$(openssl x509 -noout -dates -in "${cert_path}"  | cut -d '=' -f "$i" | tr "\n" "," | rev | cut -c2- | rev ) 
-    echo $m >> output.csv
+    echo $m >> ./output/output.csv
     # out+=$m
 done
 

@@ -1,0 +1,16 @@
+{
+    "monit_summary": [
+        {
+            "process": "rabbitmq-server",
+            "status": "running"
+        },
+        {
+            "process": "bpm",
+            "status": "running"
+        },
+        {
+            "process": "test",
+            "status": "failing"
+        }
+    ]
+}
