@@ -1,2 +1,2 @@
 # sample-python
-Learning Python scripting
+For Python Self Learning and scripting
