@@ -1,4 +1,4 @@
-import csv, json, subprocess
+import csv, json, subprocess, os
 from flask import Flask
 
 app = Flask(__name__)
@@ -10,8 +10,12 @@ def csv2json(csvFile, jsonFile, rootHeader=None):
         for csvRow in csvReader:
             data.append(csvRow)
 
+
     root = {}
+    root['Host_Name'] = hostName.stdout.rstrip()
+    root['Host_IP'] = hostIP.stdout.rstrip()
     root[rootHeader] = data
+
 
     with open(jsonFile, 'w') as jsonFile:
         jsonFile.write(json.dumps(root, indent=4))
@@ -29,12 +33,13 @@ def csv2json(csvFile, jsonFile, rootHeader=None):
 @app.route('/')
 def userhelp():
     return """
-    Try the following api
+Try the following api,
+
     curl localhost:8081/api/monit
     curl localhost:8081/api/disk
     curl localhost:8081/api/certs
 
-    """
+"""
 
 @app.route('/api/certs')
 def cert_validity():
@@ -46,6 +51,7 @@ def cert_validity():
     jsonFile = './output/output.json'
     rootHeader = 'cert_validity'
     return(csv2json(csvFile, jsonFile, rootHeader))
+
 
 # def cert_validity():
 #     subprocess.run('./cert_validity.sh', shell=True)
@@ -86,6 +92,9 @@ def disk_usage():
 # print(monit_summary())
 # print(cert_validity())
 # print(disk_usage())
+
+hostName = subprocess.run(['hostname'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8', universal_newlines=True)
+hostIP = subprocess.run("hostname -I | awk '{print $1}'", shell=True,  stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8', universal_newlines=True)
 
 if __name__ == '__manin__':
     app.run(host='0.0.0.0', port=8081)
